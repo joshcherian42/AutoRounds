@@ -1,0 +1,62 @@
+.header_container {
+  height: 10vh;
+  width: 100%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  z-index: -2;
+}
+
+.Title {
+  font-size: x-large;
+  align-self: center;
+  padding-left: 2vw;
+}
+
+.clock {
+  align-self: center;
+  font-size: x-large;
+  padding-right: 1vw;
+  min-width: min-content;
+  white-space: nowrap;
+}
+
+.right_header {
+  display: flex;
+  align-items: center;
+  padding-right: 2vw;
+}
+
+.phase_text {
+  font-size: x-large;
+  padding-right: 3vw;
+  min-width: 6vw;
+  color: #a1a1a1;
+  white-space: nowrap;
+}
+
+.fall_alert {
+  font-size: xx-large;
+  position: absolute;
+  top: 15px;
+  color: white;
+}
+
+.fall_alert_text {
+  margin: 15px 0px;
+  font-size: larger;
+}
+
+.mantine-Modal-header {
+  margin-bottom: 0px;
+  padding: 20px;
+}
+.fall_alert_body {
+  padding: 20px;
+  padding-top: 15px;
+  background-color: white;
+}
+.fall_modal .mantine-Modal-modal {
+  background-color: #fa5252;
+  padding: 0px;
+}

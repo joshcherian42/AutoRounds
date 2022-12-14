@@ -1,0 +1,48 @@
+.item_container {
+  width: 27vw;
+  display: flex;
+  min-height: 150px;
+  margin-bottom: 30px;
+}
+
+.resident_info {
+  padding-left: 4%;
+  text-align: start;
+  font-size: small;
+  width: -webkit-fill-available;
+  font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  margin: 2% 0%;
+}
+
+.resident_name {
+  font-size: 1.4vw;
+  margin: 0;
+  margin-bottom: 5px;
+  align-self: flex-end;
+  font-weight: 700;
+}
+
+.resident_age {
+  margin: 0;
+}
+
+.resident_room {
+  margin: 0;
+}
+
+.resident_location {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.resident_battery {
+  margin: 0;
+  align-self: flex-end;
+}
+
+.resident_category {
+  font-size: x-small;
+  font-style: italic;
+}

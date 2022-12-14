@@ -1,0 +1,92 @@
+#green_house {
+  /* background-color: #ffffff; */
+  background-color: #ececec;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: auto;
+  /* cursor: crosshair; */
+  /* position: fixed; */
+  /* background-image: url("../../../public/images/floorplans/Green_House_Homes_Saint_Elizabeth_Home.png"); */
+  background-size: 100% 100%;
+  background-position: center;
+  z-index: -1;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#green_house_image {
+  max-width: 950px;
+  max-height: 721px;
+  height: 100%;
+  width: auto;
+}
+
+.map_sidebar {
+  width: 20vw;
+  height: 80%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 1%;
+  margin-left: 20px;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+.map_sidebar_container {
+  width: 90%;
+  margin-top: 5%;
+  margin-left: 2.5%;
+  margin-right: 7.5%;
+}
+
+.map_search_bar {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: fit-content;
+}
+
+.map_search {
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 30px;
+  width: 100%;
+  padding: 2px 23px 2px 30px;
+  outline: 0;
+  background-color: #fff;
+  font-size: medium;
+}
+
+.map_resident_title {
+  font-size: x-large;
+  margin-top: 5%;
+  padding: 2%;
+  border-radius: 5px;
+  background-color: #46b5b8;
+  color: #fff;
+}
+
+.map_resident {
+  display: flex;
+  margin-top: 5%;
+  font-size: medium;
+  font-weight: bold;
+  justify-content: space-between;
+  padding: 0% 2%;
+}
+
+.map_resident:first-child {
+  margin-top: 1%;
+}
+
+.map_resident_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0% 2%;
+  padding-top: 5%;
+  font-size: small;
+}
