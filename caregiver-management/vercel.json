@@ -5,7 +5,7 @@
 			// Specify file to convert to a serverless function
 			"src": "index.js",
 			// Specify the NPM module that is used for the build
-			"use": "@vercel/node"
+			"use": "@now/node"
 		}
 	],
 	"routes": [
