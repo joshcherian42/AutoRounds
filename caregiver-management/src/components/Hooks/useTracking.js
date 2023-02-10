@@ -107,7 +107,6 @@ const useTracking = (resident_id, syncDate) => {
   }
 
   const filterData = (data, time_key) => {
-    console.log("Filter Data", data);
     return data.filter((row) => new Date(row[time_key]) < clockDate);
   };
 
@@ -170,28 +169,27 @@ const useTracking = (resident_id, syncDate) => {
   };
 
   const loadOTC = async () => {
-    return [];
-    // return new Promise((resolve, reject) => {
-    //   fetch("/api/loadOTC", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //   }).then((res) => {
-    //     if (res.ok) {
-    //       res.json().then((data) => {
-    //         otcData.current = data
-    //           .map((row) => {
-    //             return {
-    //               value: row.name,
-    //               otc_id: row.otc_id,
-    //               name: row.name,
-    //             };
-    //           })
-    //           .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
-    //         resolve(true);
-    //       });
-    //     }
-    //   });
-    // });
+    return new Promise((resolve, reject) => {
+      fetch("/api/loadOTC", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then((data) => {
+            otcData.current = data
+              .map((row) => {
+                return {
+                  value: row.name,
+                  otc_id: row.otc_id,
+                  name: row.name,
+                };
+              })
+              .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+            resolve(true);
+          });
+        }
+      });
+    });
   };
 
   const addDataHelper = (value_type, row) => {
@@ -287,9 +285,9 @@ const useTracking = (resident_id, syncDate) => {
       loadMetric("/api/loadGlucose", glucoseData, "timestamp"),
       loadMetric("/api/loadWeight", weightData, "timestamp"),
 
-      // loadPrescriptions(),
+      loadPrescriptions(),
       // loadOTC(),
-      // loadMetric("/api/loadTakingMedication", medicationTimes, "timestamp"),
+      loadMetric("/api/loadTakingMedication", medicationTimes, "timestamp"),
       // loadMetric("/api/loadTakingOTC", otcTimes, "timestamp"),
     ]).then(() => {
       console.log("ALL DONE");
