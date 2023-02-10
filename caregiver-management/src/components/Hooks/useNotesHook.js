@@ -61,7 +61,7 @@ const useNotesHook = () => {
       note_id: notesMap.current.size + 1,
       user_entered: true,
     };
-    notesMap.current.set(note.note_id, complete_note);
+    notesMap.current.set(complete_note.note_id, complete_note);
     updateNotesState();
   };
 
