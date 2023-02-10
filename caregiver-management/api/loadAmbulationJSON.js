@@ -4,15 +4,15 @@ import path from "path";
 export default function handler(req, res) {
   console.log(
     "Ambulation",
-    fs.existsSync(path.join()),
-    fs.existsSync(path.join("data")),
-    fs.existsSync(path.join("data", "ambulation.json"))
+    existsSync(path.join()),
+    existsSync(path.join("data")),
+    existsSync(path.join("data", "ambulation.json"))
   );
   console.log(
     "Ambulation",
-    fs.existsSync(path.join(process.cwd())),
-    fs.existsSync(path.join(process.cwd(), "data")),
-    fs.existsSync(path.join(process.cwd(), "data", "ambulation.json"))
+    existsSync(path.join(process.cwd())),
+    existsSync(path.join(process.cwd(), "data")),
+    existsSync(path.join(process.cwd(), "data", "ambulation.json"))
   );
 
   const file = path.join(process.cwd(), "data", "ambulation.json");
