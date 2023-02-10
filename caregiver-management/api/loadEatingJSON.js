@@ -1,8 +1,8 @@
 import { readFileSync } from 'fs';
-
-const file = require("../data/eating.json");
+import path from 'path';
 
 export default function handler(req, res) {
+  const file = path.join(process.cwd(), 'data', 'eating.json');
   const stringified = readFileSync(file, 'utf8');
 
   res.setHeader('Content-Type', 'application/json');
