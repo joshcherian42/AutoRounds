@@ -1,8 +1,8 @@
 import { readFileSync } from 'fs';
-import path from 'path';
+
+const file = require("../data/blood_pressure.json");
 
 export default function handler(req, res) {
-  const file = path.join('..', 'data', 'blood_pressure.json');
   const stringified = readFileSync(file, 'utf8');
 
   res.setHeader('Content-Type', 'application/json');
