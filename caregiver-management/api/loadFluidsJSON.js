@@ -7,7 +7,7 @@ export default function handler(req, res) {
     process.cwd(),
     "caregiver-management",
     "data",
-    "fluids.json"
+    "fluid.json"
   );
   const stringified = readFileSync(file, "utf8");
   const data = JSON.parse(stringified)["data"];
