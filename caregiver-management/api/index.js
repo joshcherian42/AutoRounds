@@ -20,6 +20,15 @@ const weightJSON = require("./data/weight.json");
 const PORT = process.env.PORT || 5001;
 
 const app = express();
+
+const {v4} = require('uuid')
+// Vercel integration
+app.get('/api', (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
+});
+
+
 app.use(cors());
 // app.use(bodyParser.json());
 app.use(bodyParser.json({ limit: "1gb" }));
