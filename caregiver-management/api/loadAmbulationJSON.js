@@ -9,17 +9,27 @@ export default function handler(req, res) {
     existsSync(path.join("data", "ambulation.json"))
   );
   console.log(
-    "Ambulation",
+    "Process CWD",
     existsSync(path.join(process.cwd())),
     existsSync(path.join(process.cwd(), "data")),
     existsSync(path.join(process.cwd(), "data", "ambulation.json"))
   );
 
-  const file = path.join(process.cwd(), "data", "ambulation.json");
-  const stringified = readFileSync(file, "utf8");
+  console.log(
+    "Relative",
+    existsSync(path.join("..")),
+    existsSync(path.join("..", "data")),
+    existsSync(path.join("..", "data", "ambulation.json"))
+  );
+
+
+
+  // const file = path.join(process.cwd(), "data", "ambulation.json");
+  // const stringified = readFileSync(file, "utf8");
 
   res.setHeader("Content-Type", "application/json");
-  return res.end(stringified);
+  // return res.end(stringified);
+  return res.end("[]")
 }
 
 // import path from 'path';
