@@ -111,7 +111,6 @@ const useTracking = (resident_id, syncDate) => {
   };
 
   const loadMetric = async (path, ref, time_key) => {
-    console.log("Looking for paths", path + "JSON", "and", path)
     return new Promise((resolve, reject) => {
       ref.current = [];
       fetch(path + "JSON", {
@@ -122,27 +121,26 @@ const useTracking = (resident_id, syncDate) => {
         headers: { "Content-Type": "application/json" },
       }).then((res) => {
         if (res.ok) {
-          console.log("RESPONSE 1")
           res.json().then((data1) => {
-            console.log("GOT DATA1");
-            fetch(path, {
-              method: "POST",
-              body: JSON.stringify({
-                resident_id,
-              }),
-              headers: { "Content-Type": "application/json" },
-            }).then((res) => {
-              console.log("GOT RESPONSE 2")
-              if (res.ok) {
-                res.json().then((data2) => {
-                  console.log("GOT DATA 2")
-                  ref.current = filterData(data1, time_key).concat(
-                    filterData(data2, time_key)
-                  );
-                  resolve(true);
-                });
-              }
-            });
+            ref.current = filterData(data1, time_key);
+            resolve(true);
+
+            // fetch(path, {
+            //   method: "POST",
+            //   body: JSON.stringify({
+            //     resident_id,
+            //   }),
+            //   headers: { "Content-Type": "application/json" },
+            // }).then((res) => {
+            //   if (res.ok) {
+            //     res.json().then((data2) => {
+            //       ref.current = filterData(data1, time_key).concat(
+            //         filterData(data2, time_key)
+            //       );
+            //       resolve(true);
+            //     });
+            //   }
+            // });
           });
         }
       });
