@@ -1,7 +1,7 @@
-import { readFileSync } from "fs";
+import { readFileSync, readFile } from "fs";
 import path from "path";
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   const { resident_id } = req.body;
   console.log("Resident ID:", resident_id);
   const file = path.join(
@@ -10,8 +10,8 @@ export default async function handler(req, res) {
     "data",
     "ambulation.json"
   );
-  // const stringified = readFileSync(file, "utf8");
-  const stringified = await fs.readFile(file, "utf8");
+  const stringified = readFileSync(file, "utf8");
+  // const stringified = await readFile(file, "utf8");
   console.log("Got:", stringified);
 
   //const stringified =
