@@ -1,33 +1,33 @@
 {
     "functions": {
-        "api/loadAmbulationJSON": {
+        "api/loadAmbulationJSON.js": {
             "includeFiles": "data/ambulation.json"
         },
-        "api/loadBathroomJSON": {
+        "api/loadBathroomJSON.js": {
             "includeFiles": "data/bathroom.json"
         },
-        "api/loadBloodPressureJSON": {
+        "api/loadBloodPressureJSON.js": {
             "includeFiles": "data/blood_pressure.json"
         },
-        "api/loadDressingJSON": {
+        "api/loadDressingJSON.js": {
             "includeFiles": "data/dressing.json"
         },
-        "api/loadEatingJSON": {
+        "api/loadEatingJSON.js": {
             "includeFiles": "data/eating.json"
         },
-        "api/loadFluidsJSON": {
+        "api/loadFluidsJSON.js": {
             "includeFiles": "data/fluids.json"
         },
-        "api/loadGlucoseJSON": {
+        "api/loadGlucoseJSON.js": {
             "includeFiles": "data/glucose.json"
         },
-        "api/loadHeartRateJSON": {
+        "api/loadHeartRateJSON.js": {
             "includeFiles": "data/heart_rate.json"
         },
-        "api/loadShoweringJSON": {
+        "api/loadShoweringJSON.js": {
             "includeFiles": "data/showering.json"
         },
-        "api/loadWeightJSON": {
+        "api/loadWeightJSON.js": {
             "includeFiles": "data/weight.json"
         }
     }
