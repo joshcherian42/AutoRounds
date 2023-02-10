@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from "fs";
+import { readFileSync, existsSync, readdirSync } from "fs";
 import path from "path";
 
 export default function handler(req, res) {
@@ -26,9 +26,26 @@ export default function handler(req, res) {
     "Process CWD .. ..",
     existsSync(path.join(process.cwd())),
     existsSync(path.join(process.cwd(), "..", "data")),
+    existsSync(path.join(process.cwd(), "..", "..")),
     existsSync(path.join(process.cwd(), "..", "..", "data")),
     existsSync(path.join(process.cwd(), "..", "..", "data", "ambulation.json"))
   );
+
+  readdirSync(path.join(process.cwd())).forEach(file => {
+    console.log(file);
+  });
+  
+  readdirSync(path.join()).forEach(file => {
+    console.log(file);
+  });
+
+  readdirSync(path.join("..")).forEach(file => {
+    console.log(file);
+  });
+
+  readdirSync(path.join("..", "..")).forEach(file => {
+    console.log(file);
+  });
 
   // const file = path.join(process.cwd(), "data", "ambulation.json");
   // const stringified = readFileSync(file, "utf8");

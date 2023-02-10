@@ -107,6 +107,7 @@ const useTracking = (resident_id, syncDate) => {
   }
 
   const filterData = (data, time_key) => {
+    console.log("Filter Data", data);
     return data.filter((row) => new Date(row[time_key]) < clockDate);
   };
 
