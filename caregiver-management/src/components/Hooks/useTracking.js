@@ -148,48 +148,48 @@ const useTracking = (resident_id, syncDate) => {
   };
 
   const loadPrescriptions = async () => {
-    return new Promise((resolve, reject) => {
-      fetch("/api/loadPrescriptions", {
-        method: "POST",
-        body: JSON.stringify({
-          resident_id: resident_id,
-        }),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            medicationData.current = data.sort((a, b) =>
-              a.name < b.name ? -1 : a.name > b.name ? 1 : 0
-            );
-            resolve(true);
-          });
-        }
-      });
-    });
+    // return new Promise((resolve, reject) => {
+    //   fetch("/api/loadPrescriptions", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       resident_id: resident_id,
+    //     }),
+    //     headers: { "Content-Type": "application/json" },
+    //   }).then((res) => {
+    //     if (res.ok) {
+    //       res.json().then((data) => {
+    //         medicationData.current = data.sort((a, b) =>
+    //           a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+    //         );
+    //         resolve(true);
+    //       });
+    //     }
+    //   });
+    // });
   };
 
   const loadOTC = async () => {
-    return new Promise((resolve, reject) => {
-      fetch("/api/loadOTC", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            otcData.current = data
-              .map((row) => {
-                return {
-                  value: row.name,
-                  otc_id: row.otc_id,
-                  name: row.name,
-                };
-              })
-              .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
-            resolve(true);
-          });
-        }
-      });
-    });
+    // return new Promise((resolve, reject) => {
+    //   fetch("/api/loadOTC", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //   }).then((res) => {
+    //     if (res.ok) {
+    //       res.json().then((data) => {
+    //         otcData.current = data
+    //           .map((row) => {
+    //             return {
+    //               value: row.name,
+    //               otc_id: row.otc_id,
+    //               name: row.name,
+    //             };
+    //           })
+    //           .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+    //         resolve(true);
+    //       });
+    //     }
+    //   });
+    // });
   };
 
   const addDataHelper = (value_type, row) => {
@@ -263,9 +263,29 @@ const useTracking = (resident_id, syncDate) => {
     physicalData.current = [];
     showeringData.current = [];
 
-    medicationData.current = [];
+  //   prescriptions
+	// fk_resident_id	int
+	// prescription_id	serial
+	// name			text
+	// drug_type		text
+	// dosage		text
+	// frequency		text
+    // medicationData.current = [];
+    medicationData.current = [{
+      fk_resident_id: 1,
+      prescription_id: 1,
+      name: "Xarelto",
+      drug_type: "prescription",
+      dosage: "10 mg",
+      frequency: "1"
+    }];
+
     medicationTimes.current = [];
-    otcData.current = [];
+    // otcData.current = [];
+    otcData.current = [
+      { name: "Acetaminophen", value: "Acetaminophen", otc_id: 1 },
+      { name: "Pseudoephedrine", value: "Pseudoephedrine", otc_id: 2 },
+    ];
     otcTimes.current = [];
 
     bloodPressureData.current = [];
@@ -285,7 +305,7 @@ const useTracking = (resident_id, syncDate) => {
       loadMetric("/api/loadGlucose", glucoseData, "timestamp"),
       loadMetric("/api/loadWeight", weightData, "timestamp"),
 
-      loadPrescriptions(),
+      // loadPrescriptions(),
       // loadOTC(),
       loadMetric("/api/loadTakingMedication", medicationTimes, "timestamp"),
       // loadMetric("/api/loadTakingOTC", otcTimes, "timestamp"),
