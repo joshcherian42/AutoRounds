@@ -56,7 +56,11 @@ const useNotesHook = () => {
   }, []);
 
   const addNote = (note) => {
-    const complete_note = { ...note, user_entered: true };
+    const complete_note = {
+      ...note,
+      note_id: notesMap.current.size + 1,
+      user_entered: true,
+    };
     notesMap.current.set(note.note_id, complete_note);
     updateNotesState();
   };
@@ -500,9 +504,7 @@ const useNotesHook = () => {
             resolved: false,
           },
         ];
-        resolve_set = [
-          
-        ];
+        resolve_set = [];
         break;
       default:
         break;

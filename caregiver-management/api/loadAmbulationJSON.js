@@ -22,14 +22,23 @@ export default function handler(req, res) {
     existsSync(path.join("..", "data", "ambulation.json"))
   );
 
-
+  console.log(
+    "Process CWD .. ..",
+    existsSync(path.join(process.cwd())),
+    existsSync(path.join(process.cwd(), "..", "data")),
+    existsSync(path.join(process.cwd(), "..", "..", "data")),
+    existsSync(path.join(process.cwd(), "..", "..", "data", "ambulation.json"))
+  );
 
   // const file = path.join(process.cwd(), "data", "ambulation.json");
   // const stringified = readFileSync(file, "utf8");
 
   res.setHeader("Content-Type", "application/json");
   // return res.end(stringified);
-  return res.end("[]")
+  const example =
+    '{"data": [{"fk_resident_id": 1, "start_time": "2022-01-01T16:57:00", "end_time": "2022-01-01T17:09:00", "activity_type": "light"}, {"fk_resident_id": 1, "start_time": "2022-01-01T21:08:00", "end_time": "2022-01-01T21:53:00", "activity_type": "light"}]}';
+
+  return res.end(example);
 }
 
 // import path from 'path';
