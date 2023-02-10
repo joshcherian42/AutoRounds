@@ -31,21 +31,40 @@ export default function handler(req, res) {
     existsSync(path.join(process.cwd(), "..", "..", "data", "ambulation.json"))
   );
 
-  readdirSync(path.join(process.cwd())).forEach(file => {
-    console.log(file);
-  });
-  
-  readdirSync(path.join()).forEach(file => {
+  readdirSync(path.join(process.cwd())).forEach((file) => {
     console.log(file);
   });
 
-  readdirSync(path.join("..")).forEach(file => {
+  console.log("\n\n");
+
+  readdirSync(path.join()).forEach((file) => {
     console.log(file);
   });
 
-  readdirSync(path.join("..", "..")).forEach(file => {
+  console.log("\n\n");
+
+  readdirSync(path.join("caregiver-management")).forEach((file) => {
     console.log(file);
   });
+
+  console.log("\n\n");
+
+  readdirSync(path.join("caregiver-management", "data")).forEach((file) => {
+    console.log(file);
+  });
+
+  console.log("\n\n");
+
+  readdirSync(path.join("..")).forEach((file) => {
+    console.log(file);
+  });
+  console.log("\n\n");
+
+  readdirSync(path.join("..", "..")).forEach((file) => {
+    console.log(file);
+  });
+
+  console.log("\n\n");
 
   // const file = path.join(process.cwd(), "data", "ambulation.json");
   // const stringified = readFileSync(file, "utf8");
@@ -55,7 +74,18 @@ export default function handler(req, res) {
   const example =
     '{"data": [{"fk_resident_id": 1, "start_time": "2022-01-01T16:57:00", "end_time": "2022-01-01T17:09:00", "activity_type": "light"}, {"fk_resident_id": 1, "start_time": "2022-01-01T21:08:00", "end_time": "2022-01-01T21:53:00", "activity_type": "light"}]}';
 
-  return res.end(example);
+  // const fileContents = await fs.readFile(jsonDirectory + '/data.json', 'utf8');
+  // const data = ambulationJSON["data"];
+
+  const data = JSON.parse(example);
+
+  const filtered_data = data.filter(
+    (row) => row["fk_resident_id"] === parseInt(resident_id)
+  );
+  // res.send(filtered_data);
+  return res.end(filtered_data);
+
+  // return res.end(example);
 }
 
 // import path from 'path';
