@@ -384,7 +384,7 @@ function Header({
       </Modal>
       <div className="Title">
         <span style={{ color: theme.colors.accent[5] }}>
-          AutoRounds
+          AutoRounds Header
         </span>
         &nbsp; | &nbsp; {screenText}
       </div>
