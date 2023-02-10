@@ -73,28 +73,28 @@ function Header({
 
   useEffect(() => {
     if (editNoteState.status) {
-      fetch("/api/loadNote", {
-        method: "POST",
-        body: JSON.stringify({ note_id: editNoteState.note.note_id }),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => {
-        if (res.ok) {
-          res.json().then((data) => {
-            const note = data[0];
-            statusUpdate.setFieldValue(
-              "residentName",
-              note["resident_first_name"] + " " + note["resident_last_name"]
-            );
-            statusUpdate.setFieldValue("body", note["body"]);
-            statusUpdate.setFieldValue("caregiverName", note["caregiver_name"]);
-            statusUpdate.setFieldValue("priority", note["priority"]);
-            statusUpdate.setFieldValue(
-              "actionRequired",
-              note["action_required"]
-            );
-          });
-        }
-      });
+      // fetch("/api/loadNote", {
+      //   method: "POST",
+      //   body: JSON.stringify({ note_id: editNoteState.note.note_id }),
+      //   headers: { "Content-Type": "application/json" },
+      // }).then((res) => {
+      //   if (res.ok) {
+      //     res.json().then((data) => {
+      //       const note = data[0];
+      //       statusUpdate.setFieldValue(
+      //         "residentName",
+      //         note["resident_first_name"] + " " + note["resident_last_name"]
+      //       );
+      //       statusUpdate.setFieldValue("body", note["body"]);
+      //       statusUpdate.setFieldValue("caregiverName", note["caregiver_name"]);
+      //       statusUpdate.setFieldValue("priority", note["priority"]);
+      //       statusUpdate.setFieldValue(
+      //         "actionRequired",
+      //         note["action_required"]
+      //       );
+      //     });
+      //   }
+      // });
 
       setOpened(true);
     } else {
@@ -123,39 +123,48 @@ function Header({
       action_required: obj.actionRequired,
     };
 
-    new Promise((resolve, reject) => {
-      fetch("/api/saveNote", {
-        method: "POST",
-        body: JSON.stringify(note),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => {
-        if (res.ok) {
-          console.log("Note Saved");
+    // new Promise((resolve, reject) => {
+    //   fetch("/api/saveNote", {
+    //     method: "POST",
+    //     body: JSON.stringify(note),
+    //     headers: { "Content-Type": "application/json" },
+    //   }).then((res) => {
+    //     if (res.ok) {
+    //       console.log("Note Saved");
 
-          // Complete note data with note_id from database
-          fetch("/api/getNoteByContent", {
-            method: "POST",
-            body: JSON.stringify(note),
-            headers: { "Content-Type": "application/json" },
-          }).then((res) => {
-            if (res.ok) {
-              res.json().then((data) => {
-                resolve(data[0]);
-              });
-            }
-          });
-        }
-      });
-    }).then((res) => {
-      // Reset form
-      statusUpdate.reset();
+    //       // Complete note data with note_id from database
+    //       fetch("/api/getNoteByContent", {
+    //         method: "POST",
+    //         body: JSON.stringify(note),
+    //         headers: { "Content-Type": "application/json" },
+    //       }).then((res) => {
+    //         if (res.ok) {
+    //           res.json().then((data) => {
+    //             resolve(data[0]);
+    //           });
+    //         }
+    //       });
+    //     }
+    //   });
+    // }).then((res) => {
+    //   // Reset form
+    //   statusUpdate.reset();
 
-      // Send new note to parent to add to local map
-      addHelper(res);
+    //   // Send new note to parent to add to local map
+    //   addHelper(res);
 
-      // Close the modal
-      setOpened(false);
-    });
+    //   // Close the modal
+    //   setOpened(false);
+    // });
+
+    // Reset form
+    statusUpdate.reset();
+
+    // Send new note to parent to add to local map
+    addHelper(note);
+
+    // Close the modal
+    setOpened(false);
   };
 
   const updateNote = (obj) => {
@@ -170,17 +179,17 @@ function Header({
       action_required: obj.actionRequired,
     };
 
-    fetch("/api/updateNote", {
-      method: "POST",
-      body: JSON.stringify(vals),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => {
-      if (res.ok) {
-        if (res.ok) {
-          console.log("Note Updated");
-        }
-      }
-    });
+    // fetch("/api/updateNote", {
+    //   method: "POST",
+    //   body: JSON.stringify(vals),
+    //   headers: { "Content-Type": "application/json" },
+    // }).then((res) => {
+    //   if (res.ok) {
+    //     if (res.ok) {
+    //       console.log("Note Updated");
+    //     }
+    //   }
+    // });
 
     // Update the note locally
     const updated_note = {};
@@ -219,35 +228,37 @@ function Header({
       note_id: "-11",
     };
 
-    const complete_note = new Promise((resolve, reject) => {
-      fetch("/api/saveAlert", {
-        method: "POST",
-        body: JSON.stringify(note),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => {
-        if (res.ok) {
-          console.log("Fall Event Saved");
+    // const complete_note = new Promise((resolve, reject) => {
+    //   fetch("/api/saveAlert", {
+    //     method: "POST",
+    //     body: JSON.stringify(note),
+    //     headers: { "Content-Type": "application/json" },
+    //   }).then((res) => {
+    //     if (res.ok) {
+    //       console.log("Fall Event Saved");
 
-          // Complete note data
-          fetch("/api/getNoteByContent", {
-            method: "POST",
-            body: JSON.stringify(note),
-            headers: { "Content-Type": "application/json" },
-          }).then((res) => {
-            if (res.ok) {
-              res.json().then((data) => {
-                resolve(data[0]);
-              });
-            }
-          });
-        }
-      });
-    });
+    //       // Complete note data
+    //       fetch("/api/getNoteByContent", {
+    //         method: "POST",
+    //         body: JSON.stringify(note),
+    //         headers: { "Content-Type": "application/json" },
+    //       }).then((res) => {
+    //         if (res.ok) {
+    //           res.json().then((data) => {
+    //             resolve(data[0]);
+    //           });
+    //         }
+    //       });
+    //     }
+    //   });
+    // });
 
-    complete_note.then((res) => {
-      // Send new note to parent
-      addHelper(res);
-    });
+    // complete_note.then((res) => {
+    //   // Send new note to parent
+    //   addHelper(res);
+    // });
+
+    addHelper(note);
   };
 
   return (
