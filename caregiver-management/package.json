@@ -1,24 +1,53 @@
 {
-    "name": "server",
-    "version": "0.0.0",
+    "name": "caregiver-management",
+    "version": "0.1.0",
     "private": true,
-    "scripts": {
-        "start": "node server.js",
-        "heroku-postbuild": "cd client && npm install && npm run build"
-    },
+    "proxy": "http://localhost:5001",
     "dependencies": {
-        "@mantine/form": "^4.2.6",
-        "body-parser": "^1.20.0",
+        "@mantine/core": "^4.2.8",
+        "@mantine/dates": "^4.2.8",
+        "@mantine/form": "^4.2.8",
+        "@mantine/hooks": "^4.2.8",
+        "@mantine/notifications": "^4.2.12",
+        "@testing-library/jest-dom": "^5.16.4",
+        "@testing-library/react": "^13.2.0",
+        "@testing-library/user-event": "^13.5.0",
+        "chartjs-adapter-luxon": "^1.1.0",
         "chartjs-plugin-zoom": "^1.2.1",
-        "cors": "^2.8.5",
-        "dotenv": "^10.0.0",
-        "express": "~4.16.1",
-        "nodemon": "^2.0.16",
-        "pg": "^8.7.3",
-        "psql": "^0.0.1",
-        "react-chartjs-2": "^4.1.0"
+        "dayjs": "^1.11.3",
+        "lodash": "^4.17.21",
+        "lodash.range": "^3.2.0",
+        "paper": "^0.12.15",
+        "react": "^18.1.0",
+        "react-chartjs-2": "^4.1.0",
+        "react-dom": "^18.1.0",
+        "react-router-dom": "^6.3.0",
+        "react-scripts": "^5.0.1",
+        "tabler-icons-react": "^1.48.0",
+        "web-vitals": "^2.1.4"
     },
-    "devDependencies": {
-        "autoprefixer": "^10.4.2"
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     }
 }
