@@ -252,6 +252,7 @@ const useTracking = (resident_id, syncDate) => {
   };
 
   useEffect(() => {
+    console.log("Loading JSON data");
     setFinishedLoading(false);
     bathroomData.current = [];
     dressingData.current = [];
@@ -562,14 +563,15 @@ const useTracking = (resident_id, syncDate) => {
       );
 
       return (
-        <div className='vitals_container'>
+        <div className="vitals_container">
           <div>
             {sys}/{dia} {units}
           </div>
-          <div className='vital_timestamp'>
+          <div className="vital_timestamp">
             {timestamp.getMonth()}/{timestamp.getDate()}/
             {timestamp.getFullYear()} {timestamp.getHours()}:
-            {addZero(timestamp.getMinutes())} {(timestamp.getHours() >= 12) ? "PM" : "AM"}
+            {addZero(timestamp.getMinutes())}{" "}
+            {timestamp.getHours() >= 12 ? "PM" : "AM"}
           </div>
         </div>
       );
@@ -584,14 +586,15 @@ const useTracking = (resident_id, syncDate) => {
       );
 
       return (
-        <div className='vitals_container'>
+        <div className="vitals_container">
           <div>
             {filtered_data[filtered_data.length - 1].value} {units}
           </div>
-          <div className='vital_timestamp'>
+          <div className="vital_timestamp">
             {timestamp.getMonth()}/{timestamp.getDate()}/
             {timestamp.getFullYear()} {timestamp.getHours()}:
-            {addZero(timestamp.getMinutes())} {(timestamp.getHours() >= 12) ? "PM" : "AM"}
+            {addZero(timestamp.getMinutes())}{" "}
+            {timestamp.getHours() >= 12 ? "PM" : "AM"}
           </div>
         </div>
       );

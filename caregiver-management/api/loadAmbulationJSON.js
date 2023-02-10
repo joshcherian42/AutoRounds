@@ -1,14 +1,24 @@
-import { readFileSync } from 'fs';
-import path from 'path';
+import { readFileSync, existsSync } from "fs";
+import path from "path";
 
 export default function handler(req, res) {
-  console.log("Ambulation", process.cwd());
-  const file = path.join(process.cwd(), 'data', 'ambulation.json');
-  console.log(file);
-  console.log(path.join(".."))
-  const stringified = readFileSync(file, 'utf8');
+  console.log(
+    "Ambulation",
+    fs.existsSync(path.join()),
+    fs.existsSync(path.join("data")),
+    fs.existsSync(path.join("data", "ambulation.json"))
+  );
+  console.log(
+    "Ambulation",
+    fs.existsSync(path.join(process.cwd())),
+    fs.existsSync(path.join(process.cwd(), "data")),
+    fs.existsSync(path.join(process.cwd(), "data", "ambulation.json"))
+  );
 
-  res.setHeader('Content-Type', 'application/json');
+  const file = path.join(process.cwd(), "data", "ambulation.json");
+  const stringified = readFileSync(file, "utf8");
+
+  res.setHeader("Content-Type", "application/json");
   return res.end(stringified);
 }
 
