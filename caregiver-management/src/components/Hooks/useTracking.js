@@ -277,15 +277,15 @@ const useTracking = (resident_id, syncDate) => {
 
     Promise.all([
       loadMetric("/api/loadAmbulation", physicalData, "end_time"),
-      // loadMetric("/api/loadBathroom", bathroomData, "timestamp"),
-      // loadMetric("/api/loadEating", eatingData, "end_time"),
-      // loadMetric("/api/loadFluids", fluidData, "timestamp"),
-      // loadMetric("/api/loadDressing", dressingData, "timestamp"),
-      // loadMetric("/api/loadShowering", showeringData, "timestamp"),
-      // loadMetric("/api/loadBloodPressure", bloodPressureData, "timestamp"),
-      // loadMetric("/api/loadHeartRate", heartRateData, "timestamp"),
-      // loadMetric("/api/loadGlucose", glucoseData, "timestamp"),
-      // loadMetric("/api/loadWeight", weightData, "timestamp"),
+      loadMetric("/api/loadBathroom", bathroomData, "timestamp"),
+      loadMetric("/api/loadEating", eatingData, "end_time"),
+      loadMetric("/api/loadFluids", fluidData, "timestamp"),
+      loadMetric("/api/loadDressing", dressingData, "timestamp"),
+      loadMetric("/api/loadShowering", showeringData, "timestamp"),
+      loadMetric("/api/loadBloodPressure", bloodPressureData, "timestamp"),
+      loadMetric("/api/loadHeartRate", heartRateData, "timestamp"),
+      loadMetric("/api/loadGlucose", glucoseData, "timestamp"),
+      loadMetric("/api/loadWeight", weightData, "timestamp"),
 
       // loadPrescriptions(),
       // loadOTC(),
@@ -294,10 +294,10 @@ const useTracking = (resident_id, syncDate) => {
     ]).then(() => {
       console.log("ALL DONE");
       // Aggregate data
-      // aggBathroomData.current = aggregateTimestampedData("Toileting");
-      // aggEatingData.current = aggregateEatingFluidData("Eating");
-      // aggFluidData.current = aggregateEatingFluidData("Fluids");
-      // aggPhysicalData.current = aggregatePhysicalData();
+      aggBathroomData.current = aggregateTimestampedData("Toileting");
+      aggEatingData.current = aggregateEatingFluidData("Eating");
+      aggFluidData.current = aggregateEatingFluidData("Fluids");
+      aggPhysicalData.current = aggregatePhysicalData();
 
       // Clear loading modal
       setFinishedLoading(true);

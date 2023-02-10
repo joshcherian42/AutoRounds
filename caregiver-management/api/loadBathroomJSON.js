@@ -2,21 +2,18 @@ import { readFileSync } from 'fs';
 import path from 'path';
 
 export default function handler(req, res) {
-  const file = path.join(process.cwd(), 'data', 'bathroom.json');
-  const stringified = readFileSync(file, 'utf8');
-
-  res.setHeader('Content-Type', 'application/json');
-  return res.end(stringified);
+  const { resident_id } = req.body;
+  const file = path.join(
+    process.cwd(),
+    "caregiver-management",
+    "data",
+    "bathroom.json"
+  );
+  const stringified = readFileSync(file, "utf8");
+  const data = JSON.parse(stringified)["data"];
+  const filtered_data = data.filter(
+    (row) => row["fk_resident_id"] === parseInt(resident_id)
+  );
+  // res.setHeader("Content-Type", "application/json");
+  res.send(filtered_data);
 }
-
-// import path from 'path';
-// import { promises as fs } from 'fs';
-
-// export default async function handler(req, res) {
-//   //Find the absolute path of the json directory
-//   const jsonDirectory = path.join('data');
-//   //Read the json data file data.json
-//   const fileContents = await fs.readFile(jsonDirectory + '/bathroom.json', 'utf8');
-//   //Return the content of the data file in json format
-//   res.status(200).json(fileContents);
-// }
