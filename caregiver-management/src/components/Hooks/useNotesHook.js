@@ -37,22 +37,22 @@ const useNotesHook = () => {
 
   useEffect(() => {
     console.log("Loading Notes from Database");
-    fetch("/api/loadNotes", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((data) => {
-          for (let i = 0; i < data.length; i++) {
-            notesMap.current.set(data[i].note_id, {
-              ...data[i],
-              user_entered: true,
-            });
-          }
-          updateNotesState();
-        });
-      }
-    });
+    // fetch("/api/loadNotes", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    // }).then((res) => {
+    //   if (res.ok) {
+    //     res.json().then((data) => {
+    //       for (let i = 0; i < data.length; i++) {
+    //         notesMap.current.set(data[i].note_id, {
+    //           ...data[i],
+    //           user_entered: true,
+    //         });
+    //       }
+    //       updateNotesState();
+    //     });
+    //   }
+    // });
   }, []);
 
   const addNote = (note) => {
@@ -71,15 +71,15 @@ const useNotesHook = () => {
   const resolveNote = (note_id) => {
     // Resolve note in database and local map
 
-    fetch("/api/resolveNote", {
-      method: "POST",
-      body: JSON.stringify({ note_id }),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => {
-      if (res.ok) {
-        console.log("Note Resolve");
-      }
-    });
+    // fetch("/api/resolveNote", {
+    //   method: "POST",
+    //   body: JSON.stringify({ note_id }),
+    //   headers: { "Content-Type": "application/json" },
+    // }).then((res) => {
+    //   if (res.ok) {
+    //     console.log("Note Resolve");
+    //   }
+    // });
 
     const note = notesMap.current.get(note_id);
     note["resolved"] = true;
@@ -91,15 +91,15 @@ const useNotesHook = () => {
   const deleteNote = (note_id) => {
     // Delete in database and local map
 
-    fetch("/api/deleteNote", {
-      method: "POST",
-      body: JSON.stringify({ note_id }),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => {
-      if (res.ok) {
-        console.log("Note Deleted");
-      }
-    });
+    // fetch("/api/deleteNote", {
+    //   method: "POST",
+    //   body: JSON.stringify({ note_id }),
+    //   headers: { "Content-Type": "application/json" },
+    // }).then((res) => {
+    //   if (res.ok) {
+    //     console.log("Note Deleted");
+    //   }
+    // });
 
     notesMap.current.delete(note_id);
     updateNotesState();
