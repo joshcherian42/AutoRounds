@@ -122,6 +122,7 @@ const useTracking = (resident_id, syncDate) => {
       }).then((res) => {
         if (res.ok) {
           res.json().then((data1) => {
+            console.log("Got data1:", data1);
             ref.current = filterData(data1, time_key);
             resolve(true);
 
