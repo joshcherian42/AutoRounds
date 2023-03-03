@@ -263,22 +263,184 @@ const useTracking = (resident_id, syncDate) => {
     physicalData.current = [];
     showeringData.current = [];
 
-  //   prescriptions
-	// fk_resident_id	int
-	// prescription_id	serial
-	// name			text
-	// drug_type		text
-	// dosage		text
-	// frequency		text
+    //   prescriptions
+    // fk_resident_id	int
+    // prescription_id	serial
+    // name			text
+    // drug_type		text
+    // dosage		text
+    // frequency		text
     // medicationData.current = [];
-    medicationData.current = [{
-      fk_resident_id: 1,
-      prescription_id: 1,
-      name: "Xarelto",
-      drug_type: "prescription",
-      dosage: "10 mg",
-      frequency: "1"
-    }];
+    medicationData.current = [
+      {
+        fk_resident_id: 1,
+        prescription_id: 1,
+        name: "Xarelto",
+        drug_type: "prescription",
+        dosage: "10 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 1,
+        prescription_id: 2,
+        name: "Evista",
+        drug_type: "prescription",
+        dosage: "5 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 1,
+        prescription_id: 3,
+        name: "Lexapro",
+        drug_type: "prescription",
+        dosage: "5 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 1,
+        prescription_id: 4,
+        name: "Multivitamin",
+        drug_type: "prescription",
+        dosage: "1",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 1,
+        prescription_id: 5,
+        name: "Vaseretic",
+        drug_type: "prescription",
+        dosage: "25 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 1,
+        prescription_id: 6,
+        name: "Lidocaine Patch",
+        drug_type: "prescription",
+        dosage: "4 %",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 2,
+        prescription_id: 7,
+        name: "Sertraline",
+        drug_type: "prescription",
+        dosage: "40 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 2,
+        prescription_id: 8,
+        name: "Lexapro",
+        drug_type: "prescription",
+        dosage: "5 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 2,
+        prescription_id: 9,
+        name: "Xarelto",
+        drug_type: "prescription",
+        dosage: "10 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 2,
+        prescription_id: 10,
+        name: "Lidocaine Patch",
+        drug_type: "prescription",
+        dosage: "4 %",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 2,
+        prescription_id: 11,
+        name: "Evista",
+        drug_type: "prescription",
+        dosage: "5 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 2,
+        prescription_id: 12,
+        name: "Multivitamin",
+        drug_type: "prescription",
+        dosage: "1",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 2,
+        prescription_id: 13,
+        name: "Omeprazole",
+        drug_type: "prescription",
+        dosage: "20 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 2,
+        prescription_id: 14,
+        name: "Vaseretic",
+        drug_type: "prescription",
+        dosage: "25 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 3,
+        prescription_id: 1,
+        name: "Omeprazole",
+        drug_type: "prescription",
+        dosage: "20 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 4,
+        prescription_id: 1,
+        name: "Lisinopril",
+        drug_type: "prescription",
+        dosage: "10 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 5,
+        prescription_id: 1,
+        name: "Xarelto",
+        drug_type: "prescription",
+        dosage: "10 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 6,
+        prescription_id: 1,
+        name: "Metformin",
+        drug_type: "prescription",
+        dosage: "500 mg",
+        frequency: "2",
+      },
+      {
+        fk_resident_id: 7,
+        prescription_id: 1,
+        name: "Crestor",
+        drug_type: "prescription",
+        dosage: "10 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 8,
+        prescription_id: 1,
+        name: "Vaseretic",
+        drug_type: "prescription",
+        dosage: "25 mg",
+        frequency: "1",
+      },
+      {
+        fk_resident_id: 9,
+        prescription_id: 1,
+        name: "Lexapro",
+        drug_type: "prescription",
+        dosage: "5 mg",
+        frequency: "1",
+      },
+    ];
 
     medicationTimes.current = [];
     // otcData.current = [];
@@ -316,6 +478,8 @@ const useTracking = (resident_id, syncDate) => {
       aggEatingData.current = aggregateEatingFluidData("Eating");
       aggFluidData.current = aggregateEatingFluidData("Fluids");
       aggPhysicalData.current = aggregatePhysicalData();
+
+      console.log("Medication times:", medicationTimes.current.length);
 
       // Clear loading modal
       setFinishedLoading(true);

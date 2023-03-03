@@ -1,13 +1,12 @@
-import { readFileSync } from 'fs';
-import path from 'path';
+import { readFileSync } from "fs";
+import path from "path";
 
 export default function handler(req, res) {
   const { resident_id } = req.body;
   const file = path.join(
     process.cwd(),
-    "caregiver-management",
     "data",
-    "eating.json"
+    "ambulation.json"
   );
   const stringified = readFileSync(file, "utf8");
   const data = JSON.parse(stringified)["data"];
