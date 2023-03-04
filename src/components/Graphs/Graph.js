@@ -99,7 +99,6 @@ function Graph({ scale, metric, health_data, syncDate, prescription_data }) {
   const [chartData, setChartData] = useState({
     datasets: [],
   });
-  console.log("Chart Data", chartData);
   const [YMin, setYMin] = useState(0);
   const [YMax, setYMax] = useState(0);
   const [month, onMonthChange] = useState(new Date());

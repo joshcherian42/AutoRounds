@@ -85,8 +85,8 @@ const useTracking = (resident_id, syncDate) => {
             return {
               timestamp: m.timestamp,
               name: medicationData.current.filter(
-                (obj) => obj.prescription_id === m.fk_prescription_id
-              )[0]["name"],
+                (obj) => obj.prescription_id === parseInt(m.fk_prescription_id)
+              )[0].name,
             };
           }),
         };
@@ -122,7 +122,6 @@ const useTracking = (resident_id, syncDate) => {
       }).then((res) => {
         if (res.ok) {
           res.json().then((data1) => {
-            console.log("Got data1:", data1);
             ref.current = filterData(data1, time_key);
             resolve(true);
 
@@ -148,7 +147,25 @@ const useTracking = (resident_id, syncDate) => {
     });
   };
 
-  const loadPrescriptions = async () => {
+  const loadPrescriptions = async (path, ref, time_key, prescription_ids) => {
+    return new Promise((resolve, reject) => {
+      ref.current = [];
+      fetch(path + "JSON", {
+        method: "POST",
+        body: JSON.stringify({
+          prescription_ids: prescription_ids
+        }),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then((data1) => {
+            ref.current = filterData(data1, time_key);
+            resolve(true);
+          });
+        }
+      });
+    });
+
     // return new Promise((resolve, reject) => {
     //   fetch("/api/loadPrescriptions", {
     //     method: "POST",
@@ -170,6 +187,10 @@ const useTracking = (resident_id, syncDate) => {
   };
 
   const loadOTC = async () => {
+    otcData.current = [
+      { name: "Acetaminophen", value: "Acetaminophen", otc_id: 1 },
+      { name: "Pseudoephedrine", value: "Pseudoephedrine", otc_id: 2 },
+    ];
     // return new Promise((resolve, reject) => {
     //   fetch("/api/loadOTC", {
     //     method: "POST",
@@ -264,14 +285,19 @@ const useTracking = (resident_id, syncDate) => {
     physicalData.current = [];
     showeringData.current = [];
 
-    //   prescriptions
+    medicationData.current = [];
+    medicationTimes.current = [];
+    otcData.current = [];
+    otcTimes.current = [];
+
+        //   prescriptions
     // fk_resident_id	int
     // prescription_id	serial
     // name			text
     // drug_type		text
     // dosage		text
     // frequency		text
-    // medicationData.current = [];
+
     medicationData.current = [
       {
         fk_resident_id: 1,
@@ -387,7 +413,7 @@ const useTracking = (resident_id, syncDate) => {
       },
       {
         fk_resident_id: 3,
-        prescription_id: 1,
+        prescription_id: 15,
         name: "Omeprazole",
         drug_type: "prescription",
         dosage: "20 mg",
@@ -395,7 +421,7 @@ const useTracking = (resident_id, syncDate) => {
       },
       {
         fk_resident_id: 4,
-        prescription_id: 1,
+        prescription_id: 27,
         name: "Lisinopril",
         drug_type: "prescription",
         dosage: "10 mg",
@@ -403,7 +429,7 @@ const useTracking = (resident_id, syncDate) => {
       },
       {
         fk_resident_id: 5,
-        prescription_id: 1,
+        prescription_id: 33,
         name: "Xarelto",
         drug_type: "prescription",
         dosage: "10 mg",
@@ -411,7 +437,7 @@ const useTracking = (resident_id, syncDate) => {
       },
       {
         fk_resident_id: 6,
-        prescription_id: 1,
+        prescription_id: 45,
         name: "Metformin",
         drug_type: "prescription",
         dosage: "500 mg",
@@ -419,7 +445,7 @@ const useTracking = (resident_id, syncDate) => {
       },
       {
         fk_resident_id: 7,
-        prescription_id: 1,
+        prescription_id: 47,
         name: "Crestor",
         drug_type: "prescription",
         dosage: "10 mg",
@@ -427,7 +453,7 @@ const useTracking = (resident_id, syncDate) => {
       },
       {
         fk_resident_id: 8,
-        prescription_id: 1,
+        prescription_id: 54,
         name: "Vaseretic",
         drug_type: "prescription",
         dosage: "25 mg",
@@ -435,7 +461,7 @@ const useTracking = (resident_id, syncDate) => {
       },
       {
         fk_resident_id: 9,
-        prescription_id: 1,
+        prescription_id: 57,
         name: "Lexapro",
         drug_type: "prescription",
         dosage: "5 mg",
@@ -443,13 +469,13 @@ const useTracking = (resident_id, syncDate) => {
       },
     ];
 
-    medicationTimes.current = [];
-    // otcData.current = [];
-    otcData.current = [
-      { name: "Acetaminophen", value: "Acetaminophen", otc_id: 1 },
-      { name: "Pseudoephedrine", value: "Pseudoephedrine", otc_id: 2 },
-    ];
-    otcTimes.current = [];
+    medicationData.current = medicationData.current.filter(
+      (ele) => ele.fk_resident_id === parseInt(resident_id)
+    );
+
+    medicationData.current = medicationData.current.sort((a, b) =>
+      a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+    );
 
     bloodPressureData.current = [];
     heartRateData.current = [];
@@ -469,8 +495,9 @@ const useTracking = (resident_id, syncDate) => {
       loadMetric("/api/loadWeight", weightData, "timestamp"),
 
       // loadPrescriptions(),
-      // loadOTC(),
-      loadMetric("/api/loadTakingMedication", medicationTimes, "timestamp"),
+      loadOTC(),
+      loadPrescriptions("/api/loadTakingMedication", medicationTimes, "timestamp", medicationData.current.map((ele) => ele.prescription_id)),
+      // loadMetric("/api/loadTakingMedication", medicationTimes, "timestamp"),
       // loadMetric("/api/loadTakingOTC", otcTimes, "timestamp"),
     ]).then(() => {
       console.log("ALL DONE");
@@ -479,8 +506,6 @@ const useTracking = (resident_id, syncDate) => {
       aggEatingData.current = aggregateEatingFluidData("Eating");
       aggFluidData.current = aggregateEatingFluidData("Fluids");
       aggPhysicalData.current = aggregatePhysicalData();
-
-      console.log("Medication times:", medicationTimes.current.length);
 
       // Clear loading modal
       setFinishedLoading(true);

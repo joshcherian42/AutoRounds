@@ -8,3 +8,4 @@ coverage/
 client/build
 client/node_modules
 ipynb/
+.vercel
