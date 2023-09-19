@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+<h1 align="center">A Step Toward Better Care: Understanding What Assisted Living Facilities' Caregivers and Residents Value in Health Monitoring Systems</h1>
+<p align="center">
+    <a href="https://github.com/joshcherian42"><strong>Josh Cherian</strong></a>
+    ·
+    <a href="https://github.com/sjray32"><strong>Samantha Ray</strong></a>
+    ·
+    <a href="https://www.gmercyu.edu/academics/faculty/thomas-mernar"><strong>Thomas Mernar</strong></a>
+    ·
+    <a href="https://www.paultaele.com/"><strong>Paul Taele</strong></a>
+    ·
+    <a href="https://www.policingequity.org/about/team/our-team/staff/helen-mach"><strong>Helen Mach</strong></a>
+    ·
+    <a href="https://github.com/jungin"><strong>Jung In Koh</strong></a>
+    ·
+    <strong>Ping Ye</strong>
+    ·
+    <a href="https://srltamu.com/"><strong>Tracy Hammond</strong></a>
+</p>
+<h2></h2>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This code is for the prototype monitoring system (AutoRounds) used in <strong>A Step Toward Better Care: Understanding What Assisted Living Facilities' Caregivers and Residents Value in Health Monitoring Systems</strong> which has been accepted at CSCW '24. In this work, we explored the potential utility of monitoring technology in formal caregiving environments, specifically employing a multi-stage, qualitative approach to further understand the needs of caregivers working in and older adults residing in Assisted Living Facilities. We developed this system based on insights gleaned from the thematic analysis of initial interviews with caregivers and subsequently utilized this interface as a means of gaining deeper insights into the potential for such systems to improve the current caregiving paradigm.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The app can be viewed here: <a href="https://auto-rounds.vercel.app/">AutoRounds</a>.
