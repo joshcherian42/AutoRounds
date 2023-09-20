@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useReducer } from "react";
+import { useState, useRef, useReducer } from "react";
 import fake_notes from "../../utils/fake_notes";
 
 const initialState = {
@@ -35,26 +35,6 @@ const useNotesHook = () => {
     );
   };
 
-  useEffect(() => {
-    console.log("Loading Notes from Database");
-    // fetch("/api/loadNotes", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    // }).then((res) => {
-    //   if (res.ok) {
-    //     res.json().then((data) => {
-    //       for (let i = 0; i < data.length; i++) {
-    //         notesMap.current.set(data[i].note_id, {
-    //           ...data[i],
-    //           user_entered: true,
-    //         });
-    //       }
-    //       updateNotesState();
-    //     });
-    //   }
-    // });
-  }, []);
-
   const addNote = (note) => {
     const complete_note = {
       ...note,
@@ -75,16 +55,6 @@ const useNotesHook = () => {
   const resolveNote = (note_id) => {
     // Resolve note in database and local map
 
-    // fetch("/api/resolveNote", {
-    //   method: "POST",
-    //   body: JSON.stringify({ note_id }),
-    //   headers: { "Content-Type": "application/json" },
-    // }).then((res) => {
-    //   if (res.ok) {
-    //     console.log("Note Resolve");
-    //   }
-    // });
-
     const note = notesMap.current.get(note_id);
     note["resolved"] = true;
     note["action_required"] = false;
@@ -94,17 +64,6 @@ const useNotesHook = () => {
 
   const deleteNote = (note_id) => {
     // Delete in database and local map
-
-    // fetch("/api/deleteNote", {
-    //   method: "POST",
-    //   body: JSON.stringify({ note_id }),
-    //   headers: { "Content-Type": "application/json" },
-    // }).then((res) => {
-    //   if (res.ok) {
-    //     console.log("Note Deleted");
-    //   }
-    // });
-
     notesMap.current.delete(note_id);
     updateNotesState();
   };
@@ -116,15 +75,6 @@ const useNotesHook = () => {
       // Reset
       notesMap.current.clear();
     }
-    // } else {
-    //   const auto_ids = notesList
-    //     .filter((note) => !note.user_entered)
-    //     .map((note) => note.note_id);
-
-    //   auto_ids.forEach((note_id) => {
-    //     notesMap.current.delete(note_id);
-    //   });
-    // }
     const auto_ids = notesList
       .filter((note) => note.is_alert)
       .map((note) => note.note_id);

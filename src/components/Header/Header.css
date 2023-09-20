@@ -35,14 +35,14 @@
   white-space: nowrap;
 }
 
-.fall_alert {
+.modal_header {
   font-size: xx-large;
   position: absolute;
   top: 15px;
   color: white;
 }
 
-.fall_alert_text {
+.modal_text {
   margin: 15px 0px;
   font-size: larger;
 }
@@ -51,12 +51,17 @@
   margin-bottom: 0px;
   padding: 20px;
 }
-.fall_alert_body {
+.modal_body {
   padding: 20px;
   padding-top: 15px;
   background-color: white;
 }
 .fall_modal .mantine-Modal-modal {
   background-color: #fa5252;
+  padding: 0px;
+}
+
+.about_modal .mantine-Modal-modal {
+  background-color: #46b5b9;
   padding: 0px;
 }

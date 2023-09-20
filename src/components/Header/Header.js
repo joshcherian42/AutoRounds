@@ -50,6 +50,7 @@ function Header({
   const [phaseText, setPhaseText] = useState("");
   const [opened, setOpened] = useState(false);
   const [fallOpened, setFallOpened] = useState(false);
+  const [showAboutModal, setShowAboutModal] = useState(false);
 
   const { clockDate } = useClock(phase, syncDate, clockCleanup, true);
 
@@ -73,34 +74,15 @@ function Header({
 
   useEffect(() => {
     if (editNoteState.status) {
-      // fetch("/api/loadNote", {
-      //   method: "POST",
-      //   body: JSON.stringify({ note_id: editNoteState.note.note_id }),
-      //   headers: { "Content-Type": "application/json" },
-      // }).then((res) => {
-      //   if (res.ok) {
-      //     res.json().then((data) => {
-      //       const note = data[0];
-      //       statusUpdate.setFieldValue(
-      //         "residentName",
-      //         note["resident_first_name"] + " " + note["resident_last_name"]
-      //       );
-      //       statusUpdate.setFieldValue("body", note["body"]);
-      //       statusUpdate.setFieldValue("caregiverName", note["caregiver_name"]);
-      //       statusUpdate.setFieldValue("priority", note["priority"]);
-      //       statusUpdate.setFieldValue(
-      //         "actionRequired",
-      //         note["action_required"]
-      //       );
-      //     });
-      //   }
-      // });
-
       setOpened(true);
     } else {
       statusUpdate.setFieldValue("residentName", resident_name);
     }
   }, [editNoteState.status, editNoteState.note.note_id, resident_name]);
+
+  useEffect(() => {
+    phaseHelper(6);
+  }, []);
 
   const submitNote = async (obj) => {
     // Save note to database
@@ -111,7 +93,6 @@ function Header({
       ? last_name
       : obj.residentName.split(" ")[1];
 
-    // const date = new Date();
     let note = {
       date: clockDate.toLocaleDateString(),
       time: clockDate.toLocaleTimeString(),
@@ -122,40 +103,6 @@ function Header({
       priority: obj.priority,
       action_required: obj.actionRequired,
     };
-
-    // new Promise((resolve, reject) => {
-    //   fetch("/api/saveNote", {
-    //     method: "POST",
-    //     body: JSON.stringify(note),
-    //     headers: { "Content-Type": "application/json" },
-    //   }).then((res) => {
-    //     if (res.ok) {
-    //       console.log("Note Saved");
-
-    //       // Complete note data with note_id from database
-    //       fetch("/api/getNoteByContent", {
-    //         method: "POST",
-    //         body: JSON.stringify(note),
-    //         headers: { "Content-Type": "application/json" },
-    //       }).then((res) => {
-    //         if (res.ok) {
-    //           res.json().then((data) => {
-    //             resolve(data[0]);
-    //           });
-    //         }
-    //       });
-    //     }
-    //   });
-    // }).then((res) => {
-    //   // Reset form
-    //   statusUpdate.reset();
-
-    //   // Send new note to parent to add to local map
-    //   addHelper(res);
-
-    //   // Close the modal
-    //   setOpened(false);
-    // });
 
     // Reset form
     statusUpdate.reset();
@@ -168,7 +115,6 @@ function Header({
   };
 
   const updateNote = (obj) => {
-    //const date = new Date();
     const vals = {
       note_id: editNoteState.note.note_id,
       date: clockDate.toLocaleDateString(),
@@ -178,18 +124,6 @@ function Header({
       priority: obj.priority,
       action_required: obj.actionRequired,
     };
-
-    // fetch("/api/updateNote", {
-    //   method: "POST",
-    //   body: JSON.stringify(vals),
-    //   headers: { "Content-Type": "application/json" },
-    // }).then((res) => {
-    //   if (res.ok) {
-    //     if (res.ok) {
-    //       console.log("Note Updated");
-    //     }
-    //   }
-    // });
 
     // Update the note locally
     const updated_note = {};
@@ -214,7 +148,6 @@ function Header({
   const fallOpenHelper = () => {
     setFallOpened(true);
 
-    // const date = new Date();
     let note = {
       date: clockDate.toLocaleDateString(),
       time: clockDate.toLocaleTimeString(),
@@ -227,36 +160,6 @@ function Header({
       is_alert: true,
       note_id: "-11",
     };
-
-    // const complete_note = new Promise((resolve, reject) => {
-    //   fetch("/api/saveAlert", {
-    //     method: "POST",
-    //     body: JSON.stringify(note),
-    //     headers: { "Content-Type": "application/json" },
-    //   }).then((res) => {
-    //     if (res.ok) {
-    //       console.log("Fall Event Saved");
-
-    //       // Complete note data
-    //       fetch("/api/getNoteByContent", {
-    //         method: "POST",
-    //         body: JSON.stringify(note),
-    //         headers: { "Content-Type": "application/json" },
-    //       }).then((res) => {
-    //         if (res.ok) {
-    //           res.json().then((data) => {
-    //             resolve(data[0]);
-    //           });
-    //         }
-    //       });
-    //     }
-    //   });
-    // });
-
-    // complete_note.then((res) => {
-    //   // Send new note to parent
-    //   addHelper(res);
-    // });
 
     addHelper(note);
   };
@@ -271,9 +174,9 @@ function Header({
         opened={fallOpened}
         onClose={() => setFallOpened(false)}
       >
-        <div className="fall_alert_body">
-          <div className="fall_alert">Fall Alert!</div>
-          <div className="fall_alert_text">
+        <div className="modal_body">
+          <div className="modal_header">Fall Alert!</div>
+          <div className="modal_text">
             Nick Miller has fallen! His location is marked on the map.
           </div>
           <Center>
@@ -286,6 +189,27 @@ function Header({
               </Button>
             </Link>
           </Center>
+        </div>
+      </Modal>
+
+      <Modal
+        className="about_modal"
+        opened={showAboutModal}
+        onClose={() => setShowAboutModal(false)}
+        size="xl"
+      >
+        <div className="modal_body">
+          <div className="modal_header">About</div>
+          <div className="modal_text">
+            This health monitoring probe was used in{" "}
+            <span style={{ textDecoration: "underline" }}>
+              A Step Toward Better Care: Understanding What Assisted Living
+              Facilities' Caregivers and Residents Value in Health Monitoring
+              Systems
+            </span>{" "}
+            which has been accepted at CSCW '24. All of the data in this system
+            is entirely fictional.
+          </div>
         </div>
       </Modal>
 
@@ -394,9 +318,7 @@ function Header({
         </Box>
       </Modal>
       <div className="Title">
-        <span style={{ color: theme.colors.accent[5] }}>
-          AutoRounds
-        </span>
+        <span style={{ color: theme.colors.accent[5] }}>AutoRounds</span>
         &nbsp; | &nbsp; {screenText}
       </div>
       <div className="right_header">
@@ -420,76 +342,10 @@ function Header({
           <Menu>
             <Menu.Item
               onClick={() => {
-                phaseHelper(-1);
-                setPhaseText("");
+                setShowAboutModal(true);
               }}
             >
-              {" "}
-              Default - Reset{" "}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                phaseHelper(0);
-                setPhaseText("Phase 0");
-              }}
-            >
-              {" "}
-              Phase 0 - Interface{" "}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                phaseHelper(1);
-                setPhaseText("Phase 1");
-              }}
-            >
-              {" "}
-              Phase 1 - Breakfast{" "}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                phaseHelper(2);
-                setPhaseText("Phase 2");
-              }}
-            >
-              {" "}
-              Phase 2 - Rounds{" "}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                phaseHelper(3);
-                setPhaseText("Phase 3");
-              }}
-            >
-              {" "}
-              Phase 3 - BP{" "}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                phaseHelper(4);
-                setPhaseText("Phase 4");
-                fallOpenHelper();
-              }}
-            >
-              {" "}
-              Phase 4 - Fall{" "}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                phaseHelper(5);
-                setPhaseText("Phase 5");
-              }}
-            >
-              {" "}
-              Phase 5 - Doctor{" "}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                phaseHelper(6);
-                setPhaseText("");
-              }}
-            >
-              {" "}
-              Phase 6{" "}
+              About
             </Menu.Item>
           </Menu>
         )}
@@ -500,7 +356,10 @@ function Header({
         )}
       </div>
       <Affix position={{ bottom: 20, right: 20 }}>
-        <Transition transition="slide-up" mounted={num_events > 0 && location.pathname !== "/map"}>
+        <Transition
+          transition="slide-up"
+          mounted={num_events > 0 && location.pathname !== "/map"}
+        >
           {(transitionStyles) => (
             <Link
               style={{ textDecoration: "none", height: "fit-content" }}
