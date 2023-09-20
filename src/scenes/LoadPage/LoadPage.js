@@ -11,9 +11,7 @@ import showering_query from "../../utils/queries/insert_showering";
 import weight_query from "../../utils/queries/insert_weight";
 import taking_medication_query from "../../utils/queries/insert_taking_medication";
 
-import reset_query from "../../utils/queries/reset_database";
-
-import { Table, useMantineTheme } from "@mantine/core";
+import { Table } from "@mantine/core";
 
 const LoadPage = () => {
   const query = (val) => {
@@ -28,17 +26,8 @@ const LoadPage = () => {
     });
   };
 
-  const theme = useMantineTheme();
-
   return (
     <div>
-      {/* <Button
-        onClick={() => {
-          query(reset_query);
-        }}
-      >
-        RESET
-      </Button> */}
 
       <Table verticalSpacing="md" fontSize="lg">
         <tbody>

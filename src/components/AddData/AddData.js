@@ -23,11 +23,10 @@ import { ReactComponent as ToolsKitchen2Comp } from "../Summary/svgs/tools-kitch
 import { ReactComponent as GlassFullComp } from "../Summary/svgs/glass-full.svg";
 import { ReactComponent as WalkComp } from "../Summary/svgs/walk.svg";
 import { ReactComponent as BathComp } from "../Summary/svgs/bath.svg";
-import { ReactComponent as QuestionMarkComp } from "../Summary/svgs/question-mark.svg";
 import { ReactComponent as XComp } from "../Summary/svgs/x.svg";
 import { ReactComponent as ActivityComp } from "../Summary/svgs/activity.svg";
 
-import { Activity, Plus } from "tabler-icons-react";
+import { Plus } from "tabler-icons-react";
 
 // Map of display name from Summary to local value_type option
 const all_options = {

@@ -192,7 +192,7 @@ const Summary = ({
       let bottom_right_y = 30 + pill_size / 2;
 
       let overlap = true;
-      while (overlap == true) {
+      while (overlap === true) {
         overlap = false;
         paper_objects.forEach(function (d, i) {
           let object_top_left_x = d.position._x - pill_size / 2;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
-// import Clock from "../Clock.js";
 import useClock from "../Hooks/useClock";
 import {
   TextInput,
@@ -145,24 +144,6 @@ function Header({
     setOpened(false);
   };
 
-  const fallOpenHelper = () => {
-    setFallOpened(true);
-
-    let note = {
-      date: clockDate.toLocaleDateString(),
-      time: clockDate.toLocaleTimeString(),
-      resident_first_name: "Nick",
-      resident_last_name: "Miller",
-      caregiver_name: "Auto",
-      body: "Nick Miller has fallen; check Map to find location",
-      priority: "3",
-      action_required: true,
-      is_alert: true,
-      note_id: "-11",
-    };
-
-    addHelper(note);
-  };
 
   return (
     <div
