@@ -201,14 +201,17 @@ function Header({
         <div className="modal_body">
           <div className="modal_header">About</div>
           <div className="modal_text">
-            This health monitoring probe was used in{" "}
-            <span style={{ textDecoration: "underline" }}>
-              A Step Toward Better Care: Understanding What Assisted Living
-              Facilities' Caregivers and Residents Value in Health Monitoring
-              Systems
-            </span>{" "}
-            which has been accepted at CSCW '24. All of the data in this system
-            is entirely fictional.
+            <p>
+              This health monitoring probe was used in{" "}
+              <span style={{ textDecoration: "underline" }}>
+                A Step Toward Better Care: Understanding What Assisted Living
+                Facilities' Caregivers and Residents Value in Health Monitoring
+                Systems
+              </span>{" "}
+              which has been accepted at{" "}
+              <a href="https://cscw.acm.org/2024/">CSCW '24</a>.{" "}
+            </p>
+            <p>All of the data in this system is entirely fictional.</p>
           </div>
         </div>
       </Modal>
